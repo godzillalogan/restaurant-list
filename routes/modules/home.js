@@ -6,7 +6,6 @@ const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
 
-
 // routes setting
 router.get('/', (req, res) => {
 

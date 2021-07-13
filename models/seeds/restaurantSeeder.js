@@ -1,14 +1,12 @@
-const mongoose = require('mongoose')
+
+db = require('../../config/mongoose')
 const Restaurant = require('../restaurant') // 載入 restaurant model
 const raw = require('../../restaurant.json')
 const seed = raw.results
-mongoose.connect('mongodb://localhost/restaurantRESTful', { useNewUrlParser: true, useUnifiedTopology: true })
-const db = mongoose.connection
-db.on('error', () => {
-  console.log('mongodb error!')
-})
+
+
+
 db.once('open', () => {
-  console.log('mongodb connected!')
   seed.forEach(restaurant => {
     Restaurant.create({
       id: restaurant.id,
