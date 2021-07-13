@@ -6,8 +6,10 @@ const exphbs = require('express-handlebars')
 
 const bodyParser = require('body-parser') //body-Parser
 
+const methodOverride = require('method-override') 
+
 const Restaurant = require('./models/restaurant')
-const restaurant = require('./models/restaurant')
+
 // const restaurant = require('./models/restaurant')
 
 
@@ -15,7 +17,7 @@ const port = 3000
 const app = express()
 
 // 設定連線到 mongoDB
-mongoose.connect('mongodb://localhost/restaurantCRUD', { useNewUrlParser: true, useUnifiedTopology: true }) 
+mongoose.connect('mongodb://localhost/restaurantRESTful', { useNewUrlParser: true, useUnifiedTopology: true }) 
 
 // 取得資料庫連線狀態
 const db = mongoose.connection
@@ -30,7 +32,7 @@ db.once('open', () => {
 
 // 用 app.use 規定每一筆請求都需要透過 body-parser 進行前置處理
 app.use(bodyParser.urlencoded({ extended: true }))
-
+app.use(methodOverride('_method'))
 // setting template engine, extname: '.hbs'，是指定副檔名為 .hbs，有了這行以後，我們才能把預設的長檔名改寫成短檔名
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs'}))
 app.set('view engine', 'hbs')
@@ -82,7 +84,7 @@ app.get('/restaurant/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.post('/restaurant/:id/edit',(req,res) => {
+app.put('/restaurant/:id',(req,res) => {
   const id = req.params.id
   const name = req.body.name 
   const name_en = req.body.name_en
@@ -111,7 +113,7 @@ app.post('/restaurant/:id/edit',(req,res) => {
 })
 
 ////delete
-app.post('/restaurant/:id/delete',(req, res) =>{
+app.delete('/restaurant/:id',(req, res) =>{
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())
