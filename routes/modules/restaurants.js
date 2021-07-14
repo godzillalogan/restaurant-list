@@ -11,15 +11,8 @@ router.get('/restaurants/new',(req,res) =>{
   return res.render('new')
 })
 router.post('/restaurants',(req,res) =>{
-  const name = req.body.name
-  const name_en = req.body.name_en
-  const category = req.body.category
-  const image = req.body.image
-  const location = req.body.location
-  const phone = req.body.phone
-  const google_map = req.body.google_map
-  const rating = req.body.rating
-  const description = req.body.description
+
+  const {name, name_en, category, image, location , phone, google_map, rating, description} = req.body
   return Restaurant.create({ name, name_en, category, image, location, phone, google_map, rating, description })     // 存入資料庫
     .then(() => res.redirect('/')) // 新增完成後導回首頁
     .catch(error => console.log(error))
@@ -47,15 +40,18 @@ router.get('/restaurants/:id/edit', (req, res) => {
 
 router.put('/restaurants/:id',(req,res) => {
   const id = req.params.id
-  const name = req.body.name 
-  const name_en = req.body.name_en
-  const category = req.body.category
-  const image = req.body.image
-  const location = req.body.location
-  const phone = req.body.phone
-  const google_map = req.body.google_map
-  const rating = req.body.rating
-  const description = req.body.description
+  /////原本的寫法，甚麼鬼
+  // const name = req.body.name 
+  // const name_en = req.body.name_en
+  // const category = req.body.category
+  // const image = req.body.image
+  // const location = req.body.location
+  // const phone = req.body.phone
+  // const google_map = req.body.google_map
+  // const rating = req.body.rating
+  // const description = req.body.description
+  /////解構賦值的寫法，讚讚 
+  const {name, name_en, category, image, location , phone, google_map, rating, description} = req.body
   return Restaurant.findById(id)
     .then(restaurant =>{
       restaurant.name = name
@@ -82,35 +78,6 @@ router.delete('/restaurants/:id',(req, res) =>{
     .catch(error => console.log(error))
 })
 
-//search
-router.get('/search', (req, res) => {
-  const keyword = req.query.keyword.trim().toLowerCase()
-
-  Restaurant.find()
-    .lean()
-    .then(restaurants =>{
-      if (keyword) {
-        restaurants = restaurants.filter(restaurant =>
-        restaurant.name.toLowerCase().includes(keyword) ||
-          restaurant.name_en.toLowerCase().includes(keyword)  ||
-          restaurant.category.toLowerCase().includes(keyword)
-        )
-      }
-      res.render('index',{restaurants})
-    })
-    .catch(error => console.log(error))
-  // return Restaurant.find()
-  //箭頭函式
-  //req.query 可以得到 EX:  req.query {keyword:'jurassic'},網址上?之後的內容可以透過req.query取得
-  //toLowerCase()輸入大小寫都可以搜尋的到
-  // const restaurants = restaurantsList.results.filter(restaurant => 
-  //   restaurant.name.toLowerCase().includes(req.query.keyword.toLowerCase()) ||
-  //   restaurant.name_en.toLowerCase().includes(req.query.keyword.toLowerCase())  ||
-  //   restaurant.category.toLowerCase().includes(req.query.keyword.toLowerCase())
-  // )
-  //keyword: req.query.keyword  可以保留搜尋的文字在input裡面
-  // res.render('index', { restaurants: restaurants, keyword: req.query.keyword})
-})
 
 
 
