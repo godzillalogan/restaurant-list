@@ -4,6 +4,7 @@ const express = require('express')
 const router = express.Router()
 
 const Restaurant = require('../../models/restaurant')
+const sotData = require('../../config/sortData.json')
 
 
 // routes setting
@@ -17,10 +18,18 @@ router.get('/', (req, res) => {
 
 //search
 router.get('/search', (req, res) => {
+  const searchInput = req.query.keyword
   const keyword = req.query.keyword.trim().toLowerCase()
-
+  const currentSortOption = req.query.sortOption
+  const sortMongoose = {
+    englishNameAsc:{name_en:'asc'},
+    englishNameDesc: { name_en: 'desc' },
+    category: { category: 'asc' },
+    location: { location: 'asc' }
+  }
   Restaurant.find()
     .lean()
+    .sort(sortMongoose[currentSortOption])
     .then(restaurants =>{
       if (keyword) {
         restaurants = restaurants.filter(restaurant =>
@@ -29,7 +38,7 @@ router.get('/search', (req, res) => {
           restaurant.category.toLowerCase().includes(keyword)
         )
       }
-      res.render('index',{restaurants})
+      res.render('index',{restaurants,sorData,currentSortOption,sea})
     })
     .catch(error => console.log(error))
 })

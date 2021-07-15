@@ -1,0 +1,18 @@
+{
+  "EnglishNameAsc":{
+    "value": "EnglishNameAsc",
+    "option": "A -> Z"
+  },
+  "EnglishNameDesc": {
+    "value": "EnglishNameDesc",
+    "option": "Z -> A"
+  },
+  "category": {
+    "value": "category",
+    "option": "類別"
+  },
+  "location": {
+    "value": "location",
+    "option": "地區"
+  }
+}
