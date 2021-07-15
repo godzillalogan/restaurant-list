@@ -1,7 +1,7 @@
 <!-- search bar -->
 <div class="container search-bar">
   <div class="search-bar-outer">
-    <form action="/search" class="row">
+    <form action="/search" method="GET" class="row">
       <div class="search-bar-inner col-md-6">
         <h4 class="mb-2">尋找餐廳：</h4>
         <div class="input-group">
@@ -14,11 +14,11 @@
       </div>
       <div class="search-bar-inner col-md-6 d-flex">
         <div for="sortOption" class="input-group align-items-end">
-          <select name="sortOption" id="sortOption">
-            <option value="">A -> Z</option>
-            <option value="">Z -> A</option>
-            <option value="">類別</option>
-            <option value="">地區</option>
+          <select class="form-control" name="sortOption" id="sortOption" onchange="submit()">
+            <option value="enNameAsc" {{#enNameAsc currentSortOption}}selected="true"{{/enNameAsc}}>A -> Z</option>
+            <option value="enNameDesc" {{#enNameDesc currentSortOption}}selected="true"{{/enNameDesc}}>Z -> A</option>
+            <option value="category" {{#category currentSortOption}}selected="true"{{/category}}>類別</option>
+            <option value="location" {{#location currentSortOption}}selected="true"{{/location}}>地區</option>
           </select>
         </div>
       </div>
