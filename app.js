@@ -18,7 +18,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(routes)  // 將 request 導入路由器
 // setting template engine, extname: '.hbs'，是指定副檔名為 .hbs，有了這行以後，我們才能把預設的長檔名改寫成短檔名
-app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs'}))
+app.engine('hbs', exphbs({ 
+  defaultLayout: 'main', 
+  extname: '.hbs', 
+  helpers: require('./controller/handlebarsHelpers')
+}))
 app.set('view engine', 'hbs')
 
 

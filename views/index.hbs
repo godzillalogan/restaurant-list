@@ -15,10 +15,10 @@
       <div class="search-bar-inner col-md-6 d-flex">
         <div for="sortOption" class="input-group align-items-end">
           <select class="form-control" name="sortOption" id="sortOption" onchange="submit()">
-            <option value="enNameAsc" {{#enNameAsc currentSortOption}}selected="true"{{/enNameAsc}}>A -> Z</option>
-            <option value="enNameDesc" {{#enNameDesc currentSortOption}}selected="true"{{/enNameDesc}}>Z -> A</option>
-            <option value="category" {{#category currentSortOption}}selected="true"{{/category}}>類別</option>
-            <option value="location" {{#location currentSortOption}}selected="true"{{/location}}>地區</option>
+            <option value="enNameAsc" {{#if (enNameAsc currentSortOption)}}selected="true"{{/if}}>A -> Z</option>
+            <option value="enNameDesc" {{#if (enNameDesc currentSortOption)}}selected="true"{{/if}}>Z -> A</option>
+            <option value="category" {{#if (category currentSortOption)}}selected="true"{{/if}}>類別</option>
+            <option value="location" {{#if (location currentSortOption)}}selected="true"{{/if}}>地區</option>
           </select>
         </div>
       </div>

@@ -4,7 +4,6 @@ const express = require('express')
 const router = express.Router()
 
 const Restaurant = require('../../models/restaurant')
-const sortData = require('../../config/sortData.json')
 
 
 // routes setting
@@ -39,7 +38,7 @@ router.get('/search', (req, res) => {
           restaurant.category.toLowerCase().includes(keyword)
         )
       }
-      res.render('index',{restaurants,sortData,currentSortOption,searchInput})
+      res.render('index',{restaurants,currentSortOption,searchInput})
     })
     .catch(error => console.log(error))
 })
