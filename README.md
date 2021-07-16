@@ -48,7 +48,7 @@
 1. 終端機輸入指令
 `git clone https://github.com/godzillalogan/restaurantRESTful.git`
 2. 進入專案
-`cd restaurantCRUD`
+`cd restaurantRESTful`
 3. 安裝相關套件
 `npm install`
 4. 新增種子資料
