@@ -14,6 +14,7 @@
     * 餐廳評分: 最高5分
 
 * 使用者可以透過搜尋餐廳名稱來找到特定的餐廳
+* 使用者可以四種排序方式來排列餐廳的順序
 
 # 餐廳的詳細資料
 
@@ -36,6 +37,7 @@
 * express : 4.17.1
 * express-handlebars :5.3.2
 * Mongodb : 4.2.15
+* method-override : 3.0.0
 # 增加CRUD功能
 * Create: 使用者點擊右上角**新增餐廳**使用者可以增加一間餐廳
 * Read: 使用者可以瀏覽全部餐廳，點擊餐廳照片可以瀏覽餐廳詳細資料
@@ -44,7 +46,7 @@
 
 # 使用方法
 1. 終端機輸入指令
-`git clone https://github.com/godzillalogan/restaurantCRUD.git`
+`git clone https://github.com/godzillalogan/restaurantRESTful.git`
 2. 進入專案
 `cd restaurantCRUD`
 3. 安裝相關套件
