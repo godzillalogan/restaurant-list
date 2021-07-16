@@ -29,9 +29,24 @@
      {{!-- 三個大括號會當成HTML處理，兩個大括號當成純文字處理 --}}
      {{{ body }}}
      <!-- include javascript files here -->
+  
   <script src="https://kit.fontawesome.com/8209e1d203.js" crossorigin="anonymous"></script>
   <script src="/javascripts/jquery-3.3.1.js"></script>
   <script src="/javascripts/popper.js"></script>
   <script src="/javascripts/bootstrap.js"></script>
+  <script>
+    const submitButton = document.querySelector('#submit-button')
+    const form = document.querySelector('#form')
+      
+    submitButton.addEventListener('click', function onSubmitButtonClicked(event) {
+      form.classList.add('was-validated')
+    })
+    form.addEventListener('submit', function onFormSubmitted(event) {
+      if (!form.checkValidity()) {
+        event.stopPropagation()
+        event.preventDefault()
+      }
+    })
+  </script>
   </body>
 </html>
