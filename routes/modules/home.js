@@ -5,7 +5,6 @@ const router = express.Router()
 
 const Restaurant = require('../../models/restaurant')
 
-
 // routes setting
 router.get('/', (req, res) => {
 
@@ -20,7 +19,6 @@ router.get('/search', (req, res) => {
   const searchInput = req.query.keyword
   const keyword = req.query.keyword.trim().toLowerCase()
   const currentSortOption = req.query.sortOption
-  console.log(currentSortOption)
   const sortMongoose = {
     enNameAsc:{name_en:'asc'},
     enNameDesc: { name_en: 'desc' },
@@ -42,7 +40,5 @@ router.get('/search', (req, res) => {
     })
     .catch(error => console.log(error))
 })
-
-
 
 module.exports = router

@@ -4,8 +4,6 @@ const Restaurant = require('../restaurant') // 載入 restaurant model
 const raw = require('../../restaurant.json')
 const seed = raw.results
 
-
-
 db.once('open', () => {
   seed.forEach(restaurant => {
     Restaurant.create({

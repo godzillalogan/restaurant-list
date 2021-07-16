@@ -38,7 +38,7 @@
 * express-handlebars :5.3.2
 * Mongodb : 4.2.15
 * method-override : 3.0.0
-# 增加CRUD功能
+# CRUD功能
 * Create: 使用者點擊右上角**新增餐廳**使用者可以增加一間餐廳
 * Read: 使用者可以瀏覽全部餐廳，點擊餐廳照片可以瀏覽餐廳詳細資料
 * Update: 使用者點可以點擊**Edit**重新編輯一家餐廳的資料

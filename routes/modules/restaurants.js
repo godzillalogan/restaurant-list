@@ -40,17 +40,7 @@ router.get('/restaurants/:id/edit', (req, res) => {
 
 router.put('/restaurants/:id',(req,res) => {
   const id = req.params.id
-  /////原本的寫法，甚麼鬼
-  // const name = req.body.name 
-  // const name_en = req.body.name_en
-  // const category = req.body.category
-  // const image = req.body.image
-  // const location = req.body.location
-  // const phone = req.body.phone
-  // const google_map = req.body.google_map
-  // const rating = req.body.rating
-  // const description = req.body.description
-  /////解構賦值的寫法，讚讚 
+  /////解構賦值
   const {name, name_en, category, image, location , phone, google_map, rating, description} = req.body
   return Restaurant.findById(id)
     .then(restaurant =>{
@@ -77,8 +67,5 @@ router.delete('/restaurants/:id',(req, res) =>{
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
-
-
-
 
 module.exports = router
