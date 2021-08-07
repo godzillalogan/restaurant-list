@@ -15,5 +15,4 @@ router.use('/users', users)
 module.exports = router
 
 router.use('/', authenticator, restaurants)
-// 將網址結構符合 / 字串的 request 導向 home 模組 
 router.use('/', authenticator, home)
