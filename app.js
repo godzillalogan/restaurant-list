@@ -2,6 +2,7 @@
 const express = require('express')
 const session = require('express-session')
 const exphbs = require('express-handlebars') //沒有給 ./ ，代表去node_modules裡面去找
+const usePassport = require('./config/passport')
 const bodyParser = require('body-parser') //body-Parser
 const methodOverride = require('method-override') 
 
@@ -13,11 +14,14 @@ require('./config/mongoose')
 const port = 3000
 const app = express()
 
+usePassport(app)
+
 app.use(session({
   secret: 'ThisIsMySecret',
   resave: false,
   saveUninitialized: true
 }))
+
 // 用 app.use 規定每一筆請求都需要透過 body-parser 進行前置處理
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
