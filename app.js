@@ -14,7 +14,7 @@ require('./config/mongoose')
 const port = 3000
 const app = express()
 
-usePassport(app)
+
 
 app.use(session({
   secret: 'ThisIsMySecret',
@@ -22,12 +22,14 @@ app.use(session({
   saveUninitialized: true
 }))
 
+
+
 // 用 app.use 規定每一筆請求都需要透過 body-parser 進行前置處理
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 // setting static files
 app.use(express.static('public'))
-app.use(routes)  // 將 request 導入路由器
+
 // setting template engine, extname: '.hbs'，是指定副檔名為 .hbs，有了這行以後，我們才能把預設的長檔名改寫成短檔名
 app.engine('hbs', exphbs({ 
   defaultLayout: 'main', 
@@ -35,6 +37,16 @@ app.engine('hbs', exphbs({
   helpers: require('./hbsHelpers/handlebarsHelpers')
 }))
 app.set('view engine', 'hbs')
+
+usePassport(app) //// 呼叫 Passport 函式並傳入 app，這條要寫在路由之前
+
+app.use((req, res, next) => {   //放在usePassport(app) 之後、app.use(routes) 之前
+  res.locals.isAuthenticated = req.isAuthenticated() //locals是指會把這些參數直接放到回應的data裡面的東西
+  res.locals.user = req.user  //反序列化時，取出的user資訊
+  next()
+})
+
+app.use(routes)  // 將 request 導入路由器
 
 
 // start and listen on the Express server

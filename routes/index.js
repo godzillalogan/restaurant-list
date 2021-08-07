@@ -11,8 +11,9 @@ const { authenticator } = require('../middleware/auth')
 
 router.use('/users', users)
 
+router.use('/', authenticator, restaurants)
+router.use('/', authenticator, home)
+
 // 匯出路由器
 module.exports = router
 
-router.use('/', authenticator, restaurants)
-router.use('/', authenticator, home)
