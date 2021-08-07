@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars') //沒有給 ./ ，代表去node_mod
 const usePassport = require('./config/passport')
 const bodyParser = require('body-parser') //body-Parser
 const methodOverride = require('method-override') 
+const flash = require('connect-flash')
 
 ////引用的設定
 const routes = require('./routes')  // 引用路由器
@@ -40,11 +41,16 @@ app.set('view engine', 'hbs')
 
 usePassport(app) //// 呼叫 Passport 函式並傳入 app，這條要寫在路由之前
 
+app.use(flash())
+
 app.use((req, res, next) => {   //放在usePassport(app) 之後、app.use(routes) 之前
   res.locals.isAuthenticated = req.isAuthenticated() //locals是指會把這些參數直接放到回應的data裡面的東西
   res.locals.user = req.user  //反序列化時，取出的user資訊
+  res.locals.success_msg = req.flash('success_msg')  // 設定 success_msg 訊息
+  res.locals.warning_msg = req.flash('warning_msg')  // 設定 warning_msg 訊息
   next()
 })
+
 
 app.use(routes)  // 將 request 導入路由器
 
