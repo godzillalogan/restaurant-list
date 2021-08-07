@@ -67,3 +67,19 @@
     <a href="/" class="btn btn-secondary mr-2">Back</a>
   </form>
 </div>
+
+
+<script>
+  const submitButton = document.querySelector('#submit-button')
+  const form = document.querySelector('#form')
+
+  submitButton.addEventListener('click', function onSubmitButtonClicked(event) {
+    form.classList.add('was-validated')
+  })
+  form.addEventListener('submit', function onFormSubmitted(event) {
+    if (!form.checkValidity()) {
+      event.stopPropagation()
+      event.preventDefault()
+    }
+  })
+</script>
