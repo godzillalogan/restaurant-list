@@ -2,23 +2,25 @@
 const express = require('express')
 const session = require('express-session')
 const exphbs = require('express-handlebars') //沒有給 ./ ，代表去node_modules裡面去找
-const usePassport = require('./config/passport')
 const bodyParser = require('body-parser') //body-Parser
 const methodOverride = require('method-override') 
 const flash = require('connect-flash')
 
 ////引用的設定
+const usePassport = require('./config/passport')
 const routes = require('./routes')  // 引用路由器
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 require('./config/mongoose')
 
-
-const port = 3000
+const PORT = process.env.PORT
 const app = express()
 
 
 
 app.use(session({
-  secret: 'ThisIsMySecret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
@@ -56,6 +58,6 @@ app.use(routes)  // 將 request 導入路由器
 
 
 // start and listen on the Express server
-app.listen(port, () => {
-  console.log(`Express is listening on http://localhost:${port}`)
+app.listen(PORT, () => {
+  console.log(`Express is listening on http://localhost:${PORT}`)
 })
