@@ -7,8 +7,8 @@ const Restaurant = require('../../models/restaurant')
 
 // routes setting
 router.get('/', (req, res) => {
-
-  Restaurant.find()
+  const userId = req.user._id   // 變數設定
+  Restaurant.find({ userId })
     .lean()
     .then(restaurants => res.render('index', {restaurants}))
     .catch(error => console.log(error))
@@ -16,6 +16,7 @@ router.get('/', (req, res) => {
 
 //search
 router.get('/search', (req, res) => {
+  const userId = req.user._id   // 變數設定
   const searchInput = req.query.keyword
   const keyword = req.query.keyword.trim().toLowerCase()
   const currentSortOption = req.query.sortOption
@@ -25,7 +26,7 @@ router.get('/search', (req, res) => {
     category: { category: 'asc' },
     location: { location: 'asc' }
   }
-  Restaurant.find()
+  Restaurant.find({ userId })
     .lean()
     .sort(sortMongoose[currentSortOption])
     .then(restaurants =>{
