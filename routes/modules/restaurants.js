@@ -5,7 +5,6 @@ const router = express.Router()
 
 const Restaurant = require('../../models/restaurant')
 
-
 //Create
 router.get('/restaurants/new',(req,res) =>{
   return res.render('new')

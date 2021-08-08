@@ -17,15 +17,11 @@ require('./config/mongoose')
 const PORT = process.env.PORT
 const app = express()
 
-
-
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
-
-
 
 // 用 app.use 規定每一筆請求都需要透過 body-parser 進行前置處理
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -53,9 +49,7 @@ app.use((req, res, next) => {   //放在usePassport(app) 之後、app.use(routes
   next()
 })
 
-
 app.use(routes)  // 將 request 導入路由器
-
 
 // start and listen on the Express server
 app.listen(PORT, () => {
