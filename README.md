@@ -15,6 +15,8 @@
 
 * 使用者可以透過搜尋餐廳名稱來找到特定的餐廳
 * 使用者可以四種排序方式來排列餐廳的順序
+* 使用者可以註冊帳號
+* 使用者也可以透過 Facebook Login 直接登入
 
 # 餐廳的詳細資料
 
@@ -32,12 +34,18 @@
 
     * 圖片
 # 環境建置
-* node.js : 10.15.0
-* nodemon : 2.0.7
-* express : 4.17.1
-* express-handlebars :5.3.2
-* Mongodb : 4.2.15
-* method-override : 3.0.0
+* bcryptjs: 2.4.3
+* body-parser: 1.19.0
+* connect-flash: 0.1.1
+* dotenv: 10.0.0
+* express: 4.17.1
+* express-handlebars: 5.3.2
+* express-session: 1.17.2
+* method-override: 3.0.0
+* mongoose: 5.13.2
+* passport: 0.4.1
+* passport-facebook: 3.0.0
+* passport-local: 1.0.0
 # CRUD功能
 * Create: 使用者點擊右上角**新增餐廳**使用者可以增加一間餐廳
 * Read: 使用者可以瀏覽全部餐廳，點擊餐廳照片可以瀏覽餐廳詳細資料
@@ -46,9 +54,9 @@
 
 # 使用方法
 1. 終端機輸入指令
-`git clone https://github.com/godzillalogan/restaurantRESTful.git`
+`git clone https://github.com/godzillalogan/restaurant-list.git`
 2. 進入專案
-`cd restaurantRESTful`
+`cd restaurant-list`
 3. 安裝相關套件
 `npm install`
 4. 新增種子資料
